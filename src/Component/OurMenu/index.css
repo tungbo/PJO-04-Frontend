@@ -1,0 +1,12 @@
+#formList::-webkit-scrollbar{
+    display: none;
+    background-color: transparent;
+}
+#formList::-webkit-scrollbar-track{
+    display: none;
+    background-color: transparent;
+}
+#formList::-webkit-scrollbar-thumb{
+    display: none;
+    background-color: transparent;
+}

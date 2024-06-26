@@ -1,24 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
-
+import {Route,Routes} from "react-router-dom"
+import PrivateLayout from './Layout/PrivateLayout';
+import Home from './pages/Home/Home';
+import PublicLayout from './Layout/PublicLayout';
+import Login from './pages/Login/Login';
+import Product from './pages/Menu/Product';
+import Loading from './Component/Loading/Loading';
+import Cart from './pages/Cart/Cart';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+        <Routes>
+          <Route path="/" element={<PublicLayout/>}>
+            <Route index element={<Home/>} />
+            <Route path='/Login' element={<Login/>} />
+            <Route path='/OurMenu' element={<Product/>}/>
+          </Route>
+          <Route path="/Pizza" element={<PrivateLayout/>}>
+            <Route path='/Pizza/Cart' element={<Cart/>} />
+          </Route>
+        </Routes>
+        <Loading/>
+      </div>
   );
 }
 
