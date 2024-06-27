@@ -6,7 +6,9 @@ import { CartController } from "../../Service/CartController";
 import { GetUserInfo } from "../../redux/selector";
 import { useSelector } from "react-redux";
 import { AppContextAPI } from "../../Context/AppContext";
+import { CheckoutController } from "../../Service/Checkout";
 const Cart = () => {
+  let total = 0;
     const [listCart,setListCart] = React.useState([])
     const {idAccount} = useSelector(GetUserInfo)
     const {hanldeIncrementCart,hanldeDecrementCart,hanldeRemoveCart} = React.useContext(AppContextAPI)
@@ -17,7 +19,14 @@ const Cart = () => {
         console.log("chuaw dawng nhap")
        }
     },[])
-    
+    const hanldeCheckout = (total)=>{
+      // console.log({totalOrderPiza:total,orderDetail:[...listCart]})
+     if(listCart.length >0){
+      CheckoutController.Checkout({idAccount:idAccount,totalOrderPiza:total,orderDetail:[...listCart]})
+      window.location.reload()
+     }
+
+    }
    
   return (
     <div className="flex pt-28 mb-28">
@@ -34,32 +43,36 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-           {listCart.map((cart,index)=>(
-             <tr key={index}>
-             <td>
-               <img className="mx-auto" src={imgProduct} width={100} alt="" />
-             </td>
-             <td className="font-medium">{cart.namePiza}</td>
-             <td>${cart.Price}</td>
-             <td className="flex justify-center h-28 items-center">
-               <div onClick={()=>hanldeDecrementCart(cart)}>
-                 <FaArrowLeft className="cursor-pointer" />
-               </div>
-               <input type="text" onChange={()=>{}} value={cart.quantity} className="w-4 text-center" />
-               <div onClick={()=>hanldeIncrementCart(cart)}>
-                 <FaArrowRight className="cursor-pointer" />
-               </div>
-             </td>
-             <td>
-               {cart.Price * cart.quantity}
-             </td>
-             <td>
-               <div onClick={()=>hanldeRemoveCart(cart)}>
-                 <FaTrashAlt className="mx-auto cursor-pointer" />
-               </div>
-             </td>
-           </tr>
-           ))}
+           {listCart.map((cart,index)=>{
+
+            total = total + (cart.Price * cart.quantity)
+            return(
+              <tr key={index}>
+              <td>
+                <img className="mx-auto" src={imgProduct} width={100} alt="" />
+              </td>
+              <td className="font-medium">{cart.namePiza}</td>
+              <td>${cart.Price}</td>
+              <td className="flex justify-center h-28 items-center">
+                <div onClick={()=>hanldeDecrementCart(cart)}>
+                  <FaArrowLeft className="cursor-pointer" />
+                </div>
+                <input type="text" onChange={()=>{}} value={cart.quantity} className="w-4 text-center" />
+                <div onClick={()=>hanldeIncrementCart(cart)}>
+                  <FaArrowRight className="cursor-pointer" />
+                </div>
+              </td>
+              <td>
+                {cart.Price * cart.quantity}
+              </td>
+              <td>
+                <div onClick={()=>hanldeRemoveCart(cart)}>
+                  <FaTrashAlt className="mx-auto cursor-pointer" />
+                </div>
+              </td>
+            </tr>
+            )
+           })}
           </tbody>
         </table>
       </div>
@@ -74,7 +87,7 @@ const Cart = () => {
                 <p className="text-lg text-gray-600">Total</p>
                 <p className="text-lg text-gray-600">$290.00</p>
             </div>
-            <button className="bg-button py-3 px-20 translate-x-14 rounded-3xl">Checkout</button>
+            <button onClick={()=>hanldeCheckout(total)} className="bg-button py-3 px-20 translate-x-14 rounded-3xl">Checkout</button>
         </div>
         
       </div>

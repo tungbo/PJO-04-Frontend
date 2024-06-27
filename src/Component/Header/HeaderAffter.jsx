@@ -46,7 +46,7 @@ const HeaderAffter = () => {
           <div className="w-[40%]">
             <ul className="flex items-center mt-6 justify-around">
               <li>
-                <Link className={`text-xl font-medium`} to="">Home</Link>
+                <Link className={`text-xl font-medium`} to="/">Home</Link>
               </li>
               <li>
                 <Link className="text-xl font-medium" to="/OurMenu">Menu</Link>

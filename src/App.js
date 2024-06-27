@@ -7,6 +7,7 @@ import Login from './pages/Login/Login';
 import Product from './pages/Menu/Product';
 import Loading from './Component/Loading/Loading';
 import Cart from './pages/Cart/Cart';
+import ProductDetail from './pages/ProductDetail/ProductDetail';
 function App() {
   return (
       <div>
@@ -15,6 +16,7 @@ function App() {
             <Route index element={<Home/>} />
             <Route path='/Login' element={<Login/>} />
             <Route path='/OurMenu' element={<Product/>}/>
+            <Route path='/ProductDetail' element={<ProductDetail/>}/>
           </Route>
           <Route path="/Pizza" element={<PrivateLayout/>}>
             <Route path='/Pizza/Cart' element={<Cart/>} />
