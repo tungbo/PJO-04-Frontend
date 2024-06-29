@@ -18,8 +18,13 @@ const AppProvider = ({ children }) => {
   }, [navigate]);
 
   const hanldeAddCart = (idCart) => {
-    const result = CartController.addCart(idCart);
-    console.log(result);
+    const isLogin =CookieController.getTokenCookies("isLogin")
+    if(isLogin){
+      CartController.addCart(idCart);
+      navigate("/Pizza/Cart")
+    }else{
+      navigate("/Login")
+    }
     setIsLoading(true);
   };
   const hanldeIncrementCart = (cart) => {
