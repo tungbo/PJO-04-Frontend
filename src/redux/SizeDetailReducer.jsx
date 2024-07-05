@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 export default createSlice({
-  name: "auth",
+  name: "SizeDetail",
   initialState: {
-    UserInfo: {},
+    size: {},
   },
   reducers: {
-    Login: (state, action) => {
-      state.UserInfo = action.payload;
+    setSize: (state, action) => {
+      state.size = action.payload;
     },
   },
 });

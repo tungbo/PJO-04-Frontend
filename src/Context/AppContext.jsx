@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CartController } from "../Service/CartController";
-
+import { CookieController } from "../Service/CookiesController";
 export const AppContextAPI = React.createContext();
 const AppProvider = ({ children }) => {
   const [scroll, setScroll] = React.useState(false);
@@ -18,28 +18,30 @@ const AppProvider = ({ children }) => {
   }, [navigate]);
 
   const hanldeAddCart = (idCart) => {
-    const isLogin =CookieController.getTokenCookies("isLogin")
-    if(isLogin){
+    const isLogin = CookieController.getTokenCookies("isLogin");
+    if (isLogin) {
       CartController.addCart(idCart);
-      navigate("/Pizza/Cart")
-    }else{
-      navigate("/Login")
+      navigate("/Pizza/Cart");
+    } else {
+      navigate("/Login");
     }
     setIsLoading(true);
   };
   const hanldeIncrementCart = (cart) => {
     const cartUpdate = { ...cart, quantity: cart.quantity + 1 };
     CartController.UpdateCart(cartUpdate);
-    window.location.reload()
+    window.location.reload();
   };
   const hanldeDecrementCart = (cart) => {
-    const cartUpdate = { ...cart, quantity: cart.quantity - 1 };
-    CartController.UpdateCart(cartUpdate);
-    window.location.reload()
+    if (cart.quantity > 1) {
+      const cartUpdate = { ...cart, quantity: cart.quantity - 1 };
+      CartController.UpdateCart(cartUpdate);
+      window.location.reload();
+    }
   };
   const hanldeRemoveCart = (cart) => {
     CartController.DeleteCart(cart);
-    window.location.reload()
+    window.location.reload();
   };
   return (
     <AppContextAPI.Provider

@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 export default createSlice({
-  name: "auth",
+  name: "PizzaDetail",
   initialState: {
-    UserInfo: {},
+    pizza: {},
   },
   reducers: {
-    Login: (state, action) => {
-      state.UserInfo = action.payload;
+    setPizza: (state, action) => {
+      state.pizza = action.payload;
     },
   },
 });

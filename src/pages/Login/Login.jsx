@@ -4,13 +4,13 @@ import { Button, Form, Input, ConfigProvider } from "antd";
 import { Author } from "../../Service/AuthorController";
 import { useNavigate } from "react-router-dom";
 import { AuthCreateContext } from "../../Context/AuthContex";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
 import UserReducer from "../../redux/UserReducer";
 const Login = () => {
-  const {setAuth} = React.useContext(AuthCreateContext)
-  const navigate = useNavigate()
+  const { setAuth } = React.useContext(AuthCreateContext);
+  const navigate = useNavigate();
   const [form] = Form.useForm();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const colors1 = ["#6253E1", "#04BEFE"];
   //   const colors2 = ['#fc6076', '#ff9a44', '#ef9d43', '#e75516'];
   //   const colors3 = ['#40e495', '#30dd8a', '#2bb673'];
@@ -19,16 +19,23 @@ const Login = () => {
   const getActiveColors = (colors) =>
     colors.map((color) => new TinyColor(color).darken(5).toString());
   const hanldeLogin = () => {
-    const values = form.getFieldsValue()
-    const a = Author.Login(values)
-    a.then(res =>{
-          document.cookie = `isLogin = true ;path=/`
-          setAuth(true)
-          navigate("/")
-          form.resetFields();
-          dispatch(UserReducer.actions.Login(res.Info))
-    }).catch(err=>console.log(err))
-    
+    const values = form.getFieldsValue();
+    const a = Author.Login(values);
+    a.then((res) => {
+      document.cookie = `isLogin = true ;path=/`;
+      setAuth(true);
+
+      form.resetFields();
+      dispatch(UserReducer.actions.Login(res.Info));
+      if (res.Info.role === "A") {
+        navigate("/admin/User");
+      } else {
+        navigate("/");
+      }
+    }).catch((err) => console.log(err));
+  };
+  const handleRegister = () => {
+    navigate("/Register");
   };
   return (
     <div className="my-36">
@@ -78,6 +85,15 @@ const Login = () => {
                 size="large"
               >
                 Login
+              </Button>
+              <Button
+                type="primary"
+                htmlType="button"
+                className="w-24"
+                size="large"
+                onClick={() => handleRegister()}
+              >
+                Register
               </Button>
             </ConfigProvider>
           </Form.Item>

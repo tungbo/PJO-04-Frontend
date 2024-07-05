@@ -1,0 +1,25 @@
+.toaster {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  z-index: 1000;
+}
+
+.toaster.success {
+  background-color: #4caf50;
+}
+
+.toaster.error {
+  background-color: #f44336;
+}
+
+.toaster button {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
