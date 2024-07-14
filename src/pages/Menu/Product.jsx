@@ -42,7 +42,10 @@ const Product = () => {
               alt=""
             />
             <div className="flex justify-around">
-              <h2 onClick={() => Detail(pro)} className="font-medium text-2xl">
+              <h2
+                onClick={() => Detail(pro)}
+                className="font-medium cursor-pointer text-2xl"
+              >
                 {pro.namePiza}
               </h2>
               <p className="text-red-600">${pro.Price}</p>

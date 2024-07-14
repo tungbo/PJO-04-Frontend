@@ -2,19 +2,22 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const OrderDetail = () => {
-  const { idAccount } = useParams();
+  const { idAccount, idOrderPiza } = useParams();
   const navigate = useNavigate();
   const [listOrderDetail, setListOrderDetail] = React.useState([]);
   console.log(listOrderDetail);
   React.useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL_BACK}/order/${idAccount}`, {
-      method: "GET",
-      credentials: "include",
-    })
+    fetch(
+      `${process.env.REACT_APP_URL_BACK}/order/${idAccount}/${idOrderPiza}`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    )
       .then((res) => res.json())
       .then((data) => setListOrderDetail(data))
       .catch((err) => console.log(err));
-  }, [idAccount]);
+  }, [idAccount, idOrderPiza]);
 
   const handleCancel = () => {
     navigate("/admin/Order");

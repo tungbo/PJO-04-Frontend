@@ -22,14 +22,15 @@ const Login = () => {
     const values = form.getFieldsValue();
     const a = Author.Login(values);
     a.then((res) => {
-      document.cookie = `isLogin = true ;path=/`;
-      setAuth(true);
-
       form.resetFields();
       dispatch(UserReducer.actions.Login(res.Info));
       if (res.Info.role === "A") {
+        document.cookie = `isLogin = true ;path=/`;
         navigate("/admin/User");
+        setAuth(true);
       } else {
+        document.cookie = `isLogin = true ;path=/`;
+        setAuth(true);
         navigate("/");
       }
     }).catch((err) => console.log(err));
@@ -81,7 +82,7 @@ const Login = () => {
               <Button
                 type="primary"
                 htmlType="submit"
-                className="w-24"
+                className="w-24 mx-3"
                 size="large"
               >
                 Login

@@ -76,7 +76,7 @@ const HeaderBeffore = () => {
             </li>
             <li>
               <Link className="text-xl font-medium" to="">
-                Cart
+                Contact
               </Link>
             </li>
             <li>

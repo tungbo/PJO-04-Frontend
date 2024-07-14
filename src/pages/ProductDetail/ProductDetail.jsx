@@ -31,6 +31,7 @@ const ProductDetail = () => {
         quantity: quantity,
       });
       navigate("/Pizza/Cart");
+      window.location.reload();
     }
   };
   return (

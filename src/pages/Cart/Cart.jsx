@@ -7,6 +7,7 @@ import { GetUserInfo } from "../../redux/selector";
 import { useSelector } from "react-redux";
 import { AppContextAPI } from "../../Context/AppContext";
 import { CheckoutController } from "../../Service/Checkout";
+import { loadStripe } from "@stripe/stripe-js";
 const Cart = () => {
   let total = 0;
   const [listCart, setListCart] = React.useState([]);
@@ -17,7 +18,7 @@ const Cart = () => {
     if (idAccount) {
       CartController.getAllCart(idAccount).then((data) => setListCart(data));
     } else {
-      console.log("chuaw dawng nhap");
+      console.log("chua dang nhap");
     }
   }, [idAccount]);
   console.log(listCart);
@@ -32,6 +33,41 @@ const Cart = () => {
       window.location.reload();
     }
   };
+  // const hanldeCheckout = async (total) => {
+  //   console.log("Starting checkout process...");
+  //   if (listCart.length > 0) {
+  //     console.log("Cart items for checkout:", listCart);
+
+  //     const stripe = await loadStripe(
+  //       "pk_test_51PVws3EpMDtYacye5GX1UsWOE2YJZj75RMSYP7m2BEzJSiFND64qiTcsIYyjwyQQp4y7JyKOA44rTT52KRmHYFc000OGY1E3RG"
+  //     );
+
+  //     const response = await fetch(
+  //       `${process.env.REACT_APP_URL_BACK}/auth/create-checkout-session`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         credentials: "include",
+  //         body: JSON.stringify({ listCart }), // Ensure listCart is sent as part of an object
+  //       }
+  //     );
+
+  //     const session = await response.json();
+  //     console.log("Stripe session:", session);
+
+  //     const result = await stripe.redirectToCheckout({
+  //       sessionId: session.id,
+  //     });
+
+  //     if (result.error) {
+  //       console.error("Stripe checkout error:", result.error.message);
+  //     }
+  //   } else {
+  //     console.log("Cart is empty. Checkout not possible.");
+  //   }
+  // };
   return (
     <div className="flex pt-28 mb-28">
       <div className="w-[75%] px-11">

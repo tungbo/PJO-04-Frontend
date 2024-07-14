@@ -22,6 +22,7 @@ const AppProvider = ({ children }) => {
     if (isLogin) {
       CartController.addCart(idCart);
       navigate("/Pizza/Cart");
+      window.location.reload();
     } else {
       navigate("/Login");
     }

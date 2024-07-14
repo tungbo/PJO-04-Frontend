@@ -43,7 +43,7 @@ function App() {
           <Route path="/admin/SizeForm" element={<SizeForm />} />
           <Route path="/admin/Order" element={<Order />} />
           <Route
-            path="/admin/OrderDetail/:idAccount"
+            path="/admin/OrderDetail/:idAccount/:idOrderPiza"
             element={<OrderDetail />}
           />
         </Route>
